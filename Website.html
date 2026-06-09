@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>RealUganda</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,sans-serif;background:#020617;color:#fff}
+nav{position:fixed;top:0;width:100%;background:rgba(2,6,23,.88);backdrop-filter:blur(10px);z-index:1000}
+.nav{max-width:1000px;margin:auto;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:800;font-size:1.3rem}
+.nav-links{display:flex;gap:24px}
+.nav-links a{text-decoration:none;color:#fff}
+.nav-links a:hover{color:#60a5fa}
+
+section{max-width:1000px;margin:auto;padding:60px 20px}
+.hero{min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center}
+.profile img{width:170px;height:170px;border-radius:50%;object-fit:cover;border:4px solid #60a5fa}
+h1{font-size:4rem;margin:15px 0}
+.typing{height:30px;color:#60a5fa;font-size:1.25rem}
+.hero p{color:#cbd5e1}
+
+.card,.stat,.social{background:#0f172a;border:1px solid rgba(255,255,255,.08);border-radius:20px}
+.card{padding:30px}
+.card p{font-size:1.25rem;line-height:1.8}
+
+.stat{padding:30px;margin-bottom:20px;text-align:center;transition:.3s}
+.stat:hover,.social:hover,.project:hover{transform:translateY(-6px)}
+.num{font-size:4rem;font-weight:800;color:#60a5fa}
+
+.projects{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.project{width:100%;border-radius:20px;transition:.3s}
+
+.socials{display:flex;flex-direction:column;gap:16px}
+.social{padding:24px;font-size:1.5rem;color:#fff;text-decoration:none;transition:.3s}
+
+footer{text-align:center;padding:30px;color:#94a3b8}
+
+@media(max-width:768px){
+.nav-links{gap:12px;font-size:.9rem}
+.projects{grid-template-columns:1fr}
+h1{font-size:2.8rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="nav">
+<div class="logo">RealUganda</div>
+<div class="nav-links">
+<a href="#about">About Me</a>
+<a href="#stats">Stats</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
+</div>
+</div>
+</nav>
+
+<section class="hero">
+<div>
+<div class="profile"><img src="duck.png" alt="duck"></div>
+<h1>RealUganda</h1>
+<div class="typing" id="typing"></div>
+<p>Welcome to my portfolio. Explore my projects and learning journey.</p>
+</div>
+</section>
+
+<section id="about">
+<h2>About Me</h2>
+<div class="card">
+<p>I'm RealUganda, a developer and technology enthusiast who enjoys building projects, learning new technologies, and exploring creative ideas. I'm always improving my skills and creating better experiences through code.</p>
+</div>
+</section>
+
+<section id="stats">
+<h2>Statistics</h2>
+<div class="stat">
+<div class="num">2</div>
+<div>Projects Built</div>
+</div>
+<div class="stat">
+<div class="num" id="daysCounter"></div>
+<div>Days Learning</div>
+</div>
+</section>
+
+<section id="projects">
+<h2>Projects</h2>
+<div class="projects">
+<img class="project" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200">
+<img class="project" src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200">
+</div>
+</section>
+
+<section id="contact">
+<h2>Contact Me</h2>
+<div class="socials">
+<a class="social" id="discordBtn" href="#">💬 Discord — uganda.s</a>
+<a class="social" href="https://youtube.com/@uganda.s0?si=AZgi951lymZfP5Bv" target="_blank">▶ YouTube — @uganda.s0</a>
+</div>
+</section>
+
+<footer>© 2026 RealUganda</footer>
+
+<script>
+document.getElementById("discordBtn").onclick=function(e){
+e.preventDefault();
+navigator.clipboard.writeText("uganda.s");
+let old=this.innerHTML;
+this.innerHTML="✅ Copied: uganda.s";
+setTimeout(()=>this.innerHTML=old,2000);
+};
+
+const baseDate=new Date();
+baseDate.setHours(0,0,0,0);
+function updateDays(){
+const now=new Date();
+const today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+const diff=Math.floor((today-baseDate)/(1000*60*60*24));
+document.getElementById("daysCounter").textContent=2190+diff;
+}
+updateDays();
+setInterval(updateDays,60000);
+
+const words=["Developer","Creator","Technology Enthusiast","Professional Duck"];
+let i=0,j=0,del=false;
+const t=document.getElementById("typing");
+function type(){
+let w=words[i];
+if(!del){t.textContent=w.substring(0,j++);if(j>w.length){del=true;setTimeout(type,1000);return;}}
+else{t.textContent=w.substring(0,j--);if(j<0){del=false;i=(i+1)%words.length;}}
+setTimeout(type,del?50:100);
+}
+type();
+</script>
+
+</body>
+</html>
